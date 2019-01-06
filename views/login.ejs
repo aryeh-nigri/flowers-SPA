@@ -1,0 +1,72 @@
+
+      <!-- Modal Header -->
+<!-- <div class="modal-header">
+    <h4 class="modal-title">Login</h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+  </div> -->
+  
+  <!-- Modal body -->
+  <div class="modal-body">
+      <div>
+        <form class="form-signin" id="form-signin">
+            <!-- <img class="mb-4" src="./Signin Template for Bootstrap_files/bootstrap-solid.svg" alt="" width="72" height="72"> -->
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            <label for="inputEmail" class="sr-only ">Email address</label>
+            <!-- class="form-control" -->
+            <input type="email" id="inputEmail" name="username" class="form-control" placeholder="Email address" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <!-- class="form-control" -->
+            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
+            <div class="checkbox mb-3">
+              <label>
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div>
+            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+            <!-- <p class="mt-5 mb-3 text-muted">© 2017-2018</p> -->
+          </form>
+        </div>
+    </div>
+    
+    <!-- Modal footer -->
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div> -->
+
+
+<script>
+
+$(function () {
+    $('#form-signin').on('submit', function (e) {
+      console.log("submitting login");
+      
+      e.preventDefault();
+      $.ajax({
+        url: 'http://localhost:8080/login', //this is the submit URL
+        type: 'POST', //or POST
+        data: '{"username":"' + $("#inputEmail").val() + '","password":"' + $("#inputPassword").val() + '"}',
+        dataType: "json",
+        success: function (result, status, xhr) {
+          if (result.d == "Success") {
+            alert('successfully submitted');
+            // $("#messageSpan").text("Login Successful, Redireting to your profile page.");
+            // setTimeout(function () { window.location = "profile.aspx"; }, 2000);
+          }
+          else{
+            alert('Login failed');
+            // $("#messageSpan").text("Login failed, Please try again.");
+          }
+
+        },
+        error: function (xhr, status, error) {
+          $("#dbData").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+        }
+        // data: $('#form-signin').serialize(),
+        // success: function (data) {
+        //   alert('successfully submitted');
+        // }
+      });
+    });
+  });
+
+</script>

@@ -1,0 +1,26 @@
+{
+    "flowers":
+    [
+        {
+            "name":"rose",
+            "color":"red",
+            "picture":"../public/images/rose.png",
+            "price":"15.90",
+            "id":1
+        },
+        {
+            "name":"violet",
+            "color":"purple",
+            "picture":"../public/images/violet.png",
+            "price":"11.30",
+            "id":2
+        },
+        {
+            "name":"margarid",
+            "color":"yellow",
+            "picture":"../public/images/margarid.png",
+            "price":"8.50",
+            "id":3
+        }
+    ]
+}
