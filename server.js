@@ -15,11 +15,6 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-let drinks = [ { name: 'Bloody Mary', drunkness:  3 },
-               { name: 'Martini',     drunkness:  5 },
-               { name: 'Scotch',      drunkness: 10 }
-             ];
-
 app.get('/', function(req, res) {
   console.log("recebi");
   res.render('index');
@@ -59,20 +54,6 @@ app.get('/flowers', function (req, res) {
   // console.log(branches);  
   res.json(flowers);
 
-});
-
-app.get('/drinks', function(req, res) {
-  let names = [];
-  drinks.forEach(function(drink) { names.push(drink.name) });
-  res.json(names);
-});
-
-app.get('/drinks/:drinkId', function(req, res) {
-  res.json(drinks[req.params.drinkId]);
-});
-
-app.get('/about', function(req, res) {
-  res.render('about');
 });
 
 
