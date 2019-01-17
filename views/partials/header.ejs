@@ -1,6 +1,6 @@
 <!-- views/partials/header.ejs -->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="#">Fixed navbar</a>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navbar">
+  <a class="navbar-brand" href="#">Flowers</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -79,10 +79,10 @@
     $('#myModal').modal('show').find('.modal-content').load($(this).attr('href'));
   });
 
-  $(document).ready(function () {
-    console.log("load about us page");
-    $('#middle-page-container').load('/about-us');
-  });
+  // $(document).ready(function () {
+  //   console.log("load about us page");
+  //   $('#middle-page-container').load('/about-us');
+  // });
 
   $('#a-contact-us').click(function () {
     console.log("load contact us page");    

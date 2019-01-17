@@ -1,6 +1,13 @@
 const path = require('path');
 const express = require('express');
+
+var myParser = require("body-parser");
+
+
 const app = express();
+
+app.use(myParser.json());
+app.use(myParser.urlencoded({extended : true}));
 
 const fs = require('fs');
 
@@ -71,7 +78,10 @@ app.get('/about', function(req, res) {
 app.post('/login', function (req, res) {
   console.log("POST");
   console.log("\n=====================\n");
-  console.log(req.username);
+  let data = req.body;
+  console.log(data);
+  console.log(data.email);
+  console.log(data.password);
   console.log("\n=====================\n");
 
   // console.log(res);

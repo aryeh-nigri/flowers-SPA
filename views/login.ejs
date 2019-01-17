@@ -17,11 +17,11 @@
             <label for="inputPassword" class="sr-only">Password</label>
             <!-- class="form-control" -->
             <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required="">
-            <div class="checkbox mb-3">
+            <!-- <div class="checkbox mb-3">
               <label>
                 <input type="checkbox" value="remember-me"> Remember me
               </label>
-            </div>
+            </div> -->
             <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
             <!-- <p class="mt-5 mb-3 text-muted">© 2017-2018</p> -->
           </form>
@@ -41,31 +41,48 @@ $(function () {
       console.log("submitting login");
       
       e.preventDefault();
-      $.ajax({
-        url: 'http://localhost:8080/login', //this is the submit URL
-        type: 'POST', //or POST
-        data: '{"username":"' + $("#inputEmail").val() + '","password":"' + $("#inputPassword").val() + '"}',
-        dataType: "json",
-        success: function (result, status, xhr) {
-          if (result.d == "Success") {
-            alert('successfully submitted');
-            // $("#messageSpan").text("Login Successful, Redireting to your profile page.");
-            // setTimeout(function () { window.location = "profile.aspx"; }, 2000);
-          }
-          else{
-            alert('Login failed');
-            // $("#messageSpan").text("Login failed, Please try again.");
-          }
+      fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+                "Content-Type": "application/json"
+            },
+        body: JSON.stringify({
+          email: $('#inputEmail').text(),
+          password: $('#inputPassword').text(),
+        })
+      })
+        .then(function (data) {
+          console.log('Request success: ', data);
+        })
+        .catch(function (error) {
+          console.log('Request failure: ', error);
+        });
 
-        },
-        error: function (xhr, status, error) {
-          $("#dbData").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
-        }
-        // data: $('#form-signin').serialize(),
-        // success: function (data) {
-        //   alert('successfully submitted');
-        // }
-      });
+      // $.ajax({
+      //   url: 'http://localhost:8080/login', //this is the submit URL
+      //   type: 'POST', //or POST
+      //   data: $('#form-signin').serialize(),
+      //   dataType: "json",
+      //   success: function (result, status, xhr) {
+      //     if (result.d == "Success") {
+      //       alert('successfully submitted');
+      //       console.log("IF");
+      //       alert(data);
+      //     }
+      //     else{
+      //       alert('Login failed');
+      //       console.log("ELSE");
+      //       alert(data);
+      //     }
+
+      //   },
+      //   error: function (xhr, status, error) {
+      //     // $("#dbData").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+      //     console.log("ERROR");
+      //     alert(this.data);
+      //   }
+      // });
+
     });
   });
 
