@@ -1,4 +1,10 @@
 <!-- views/partials/header.ejs -->
+<style>
+.forRegistered{
+  visibility: collapse;
+}
+
+</style>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="navbar">
   <a class="navbar-brand" href="#">Flowers</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
@@ -8,24 +14,27 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
 
+      <div class="forRegistered">
+        <li class="nav-item">
+          <a class="nav-link" href="#catalog" id="Catalog">Catalog</a>
+        </li>
+      </div>
+      <div class="forRegistered">
+        <li class="nav-item">
+          <a class="nav-link" href="#users" id="User">User Management</a>
+        </li>
+      </div>
+      <div class="forRegistered">
+        <li class="nav-item">
+          <a class="nav-link" href="#branches" id="Branch">Branch Management</a>
+        </li>
+      </div>
       <li class="nav-item">
-        <a class="nav-link" href="#">Catalog</a>
+        <a class="nav-link" href="#about-us" id="About-us">About the Company</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#">User Management</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">Branch Management</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">About the Company</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#contact-us" id="a-contact-us">Contact Us</a>
+        <a class="nav-link" href="#contact-us" id="Contact-us">Contact Us</a>
       </li>
 
       <!-- <li class="nav-item active">
@@ -76,17 +85,41 @@
 
   $('#a-modal').on('click', function (e) {
     e.preventDefault();
-    $('#myModal').modal('show').find('.modal-content').load($(this).attr('href'));
+    if($('#a-modal').text() == "Login"){
+      $('#myModal').modal('show').find('.modal-content').load($(this).attr('href'));
+    }
+    else{
+      fetch("http://localhost:8080/");
+    }
   });
 
-  // $(document).ready(function () {
-  //   console.log("load about us page");
-  //   $('#middle-page-container').load('/about-us');
-  // });
+  $(document).ready(function () {
+    console.log("load about us page");
+    $('#middle-page-container').load('/about-us');
+  });
 
-  $('#a-contact-us').click(function () {
+  $('#Contact-us').click(function () {
     console.log("load contact us page");    
     $('#middle-page-container').load('/contact-us');
   });
 
+  $('#User').click(function () {
+    console.log("load contact us page");    
+    $('#middle-page-container').load('/users');
+  });
+
+  $('#Catalog').click(function () {
+    console.log("load contact us page");    
+    $('#middle-page-container').load('/catalog');
+  });
+
+  $('Branch').click(function () {
+    console.log("load contact us page");    
+    $('#middle-page-container').load('/branches');
+  });
+
+  $('#About-us').click(function () {
+    console.log("load contact us page");    
+    $('#middle-page-container').load('/about-us');
+  });
 </script>

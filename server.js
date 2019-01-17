@@ -21,6 +21,7 @@ let drinks = [ { name: 'Bloody Mary', drunkness:  3 },
              ];
 
 app.get('/', function(req, res) {
+  console.log("recebi");
   res.render('index');
 });
 
@@ -79,21 +80,13 @@ app.post('/login', function (req, res) {
   console.log("POST");
   console.log("\n=====================\n");
   let data = req.body;
-  console.log(data);
   console.log(data.email);
   console.log(data.password);
   console.log("\n=====================\n");
 
-  // console.log(res);
   
-  res.send("ola");
+  res.send("OK");
   
-    // var name = req.body.username;
-    // var password = req.body.password;
-    // console.log(name);
-    // console.log(password);
-    
-    // res.send(name + " " + password);
     
     // if(name == "Admin" || name == "admin" && password == "Admin" || password == "admin"){
     //     res.send("Logged in successfully");
