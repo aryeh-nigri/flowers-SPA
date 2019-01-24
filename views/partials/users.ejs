@@ -1,3 +1,13 @@
-<p>
-    Eu sou users!
-</p>
+<ul>
+    <% users.users.forEach(function(user){ %>
+        <li><%= user.name %> - <%= user.type %></li>
+    <% }); %>
+</ul>
+
+<!-- "type":"employee",
+"name":"Moshe",
+"password":"mosh123",
+"email":"moshe@uol.com",
+"address":"Street Moshe 123",
+"id":2,
+"branchId":123 -->

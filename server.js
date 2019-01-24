@@ -17,7 +17,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
   console.log("recebi");
-  res.render('index');
+  res.render('index', {user: null});
+});
+
+app.get('/user/:userId', function(req, res) {
+  console.log("recebi com params");
+  let users = JSON.parse(fs.readFileSync('./database/users.json', 'utf-8'));
+  console.log(req.params.userId);
+
+  users.users.forEach(user => {
+    // console.log(user.name);
+    if(user.name == req.params.userId){
+      res.render('index', {user: user});
+    }
+  });
+  
+  res.send("404"); 
 });
 
 app.get('/contact-us', function(req, res) {
@@ -33,27 +48,18 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/branches', function (req, res) {
-
   let branches = JSON.parse(fs.readFileSync('./database/branches.json', 'utf-8'));
-  // console.log(branches);  
-  res.json(branches);
-
+  res.render('partials/branches', {branches: branches} );
 });
 
 app.get('/users', function (req, res) {
-
   let users = JSON.parse(fs.readFileSync('./database/users.json', 'utf-8'));
-  // console.log(branches);  
-  res.json(users);
-
+  res.render('partials/users', {users: users} );
 });
 
-app.get('/flowers', function (req, res) {
-
+app.get('/catalog', function (req, res) {
   let flowers = JSON.parse(fs.readFileSync('./database/flowers.json', 'utf-8'));
-  // console.log(branches);  
-  res.json(flowers);
-
+  res.render('partials/catalog', {flowers: flowers} );
 });
 
 
@@ -65,15 +71,19 @@ app.post('/login', function (req, res) {
   console.log(data.password);
   console.log("\n=====================\n");
 
+  let users = JSON.parse(fs.readFileSync('./database/users.json', 'utf-8'));
+  // console.log(users.users);
   
-  res.send("OK");
-  
+  users.users.forEach(user => {
+    // console.log(user.name);
     
-    // if(name == "Admin" || name == "admin" && password == "Admin" || password == "admin"){
-    //     res.send("Logged in successfully");
-    // }else{
-    //     res.send("Access Denied!");
-    // }
+    if(user.email == data.email && user.password == data.password){
+      res.json(user);
+    }
+  });
+
+  res.send("Failure");
+  
 });
 
 
