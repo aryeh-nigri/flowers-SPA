@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req, res) {
   console.log("recebi");
-  res.render('index', {user: null});
+  res.render('index', {user: "null"});
 });
 
 app.get('/user/:userId', function(req, res) {
@@ -32,7 +32,8 @@ app.get('/user/:userId', function(req, res) {
     }
   });
   
-  res.send("404"); 
+  if(!res)
+    res.send("404"); 
 });
 
 app.get('/contact-us', function(req, res) {
@@ -72,17 +73,15 @@ app.post('/login', function (req, res) {
   console.log("\n=====================\n");
 
   let users = JSON.parse(fs.readFileSync('./database/users.json', 'utf-8'));
-  // console.log(users.users);
   
   users.users.forEach(user => {
-    // console.log(user.name);
-    
     if(user.email == data.email && user.password == data.password){
       res.json(user);
     }
   });
 
-  res.send("Failure");
+  if(!res)
+    res.send("Failure");
   
 });
 
